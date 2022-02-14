@@ -35,17 +35,15 @@ describe("check weather reducer", () => {
       const availableProperties = keys.slice(0, keys.length / 2);
       const unavailableProperties = keys.slice(keys.length / 2);
 
-      const payload = availableProperties.reduce(
+      const newWeather = availableProperties.reduce(
         (obj, current) => ({ ...obj, [current]: current }),
         {}
       );
 
-      const action = { type: actionsName.updateWeather, payload };
-
-      const newState = weatherReducer(initialState, action);
+      const newState = weatherReducer(initialState, updateWeather(newWeather));
 
       expect(newState).toEqual({
-        ...payload,
+        ...newWeather,
         ...unavailableProperties.reduce(
           (obj, current) => ({ ...obj, [current]: null }),
           {}

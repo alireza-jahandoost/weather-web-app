@@ -27,12 +27,10 @@ describe("check location actions", () => {
 
 describe("check location reducer", () => {
   describe("check for updateLocation action", () => {
-    const actionName = actionsName.updateLocation;
-
-    const action = { type: actionName, payload: newLocation };
-
     test("the location property must be changed to payload's value", () => {
-      expect(locationReducer(initialState, action)).toEqual(newLocation);
+      expect(
+        locationReducer(initialState, updateLocation(newLocation))
+      ).toEqual(newLocation);
     });
   });
 });
