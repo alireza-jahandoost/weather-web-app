@@ -7,6 +7,10 @@ describe("check formatDate function", () => {
   test("check when month and day is not lower than 10", () => {
     expect(formatDate(new Date(2022, 11, 12))).toBe("2022-12-12");
   });
+  test("formatDate should throw an error if the input was not a date instance", () => {
+    expect(() => formatDate(2022, 1, 1)).toThrow();
+    expect(() => formatDate("2022-01-01")).toThrow();
+  });
 });
 
 describe("check randomString function", () => {
