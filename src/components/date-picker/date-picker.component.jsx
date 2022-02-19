@@ -1,14 +1,11 @@
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import styled from "styled-components";
-import { DatePicker } from "@material-ui/pickers";
+import { MobileDatePicker } from "@mui/lab";
 import { formatDate } from "../../utilities";
 import ErrorContainer from "../error-container/error-container.component";
-
-const StyledDatePicker = styled(DatePicker)`
-  color: white !important;
-`;
 
 const DatePickerComponent = ({
   errorMessage,
@@ -31,20 +28,21 @@ const DatePickerComponent = ({
   const minDate = new Date(Date.now() - 50 * 365 * 24 * 60 * 60 * 1000);
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <StyledDatePicker
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <MobileDatePicker
         label="Basic example"
         value={value}
         onChange={onChange}
-        format="yyyy-MM-dd"
+        inputFormat="yyyy-MM-dd"
         maxDate={maxDate}
         maxDateMessage="Date can not be after 14 days later"
         minDate={minDate}
         minDateMessage="Date can not be before 50 years ago"
         disabled={disabled}
+        renderInput={(params) => <TextField fullWidth={true} {...params} />}
       />
       <ErrorContainer error={errorMessage} />
-    </MuiPickersUtilsProvider>
+    </LocalizationProvider>
   );
 };
 

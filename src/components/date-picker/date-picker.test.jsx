@@ -29,7 +29,7 @@ test("the initial value of input must be equal to value property", () => {
 
 test("on Change, the onChange function must be called with new Date", () => {
   jest.spyOn(console, "error").mockImplementation(() => {});
-  const date = "2022-02-19";
+  const date = "2022-02-02";
   const fakeOnChange = jest.fn();
   render(<DatePicker value={date} onChange={fakeOnChange} />);
 
@@ -37,14 +37,14 @@ test("on Change, the onChange function must be called with new Date", () => {
   userEvent.click(input);
 
   const dayOfMonth = screen.getByRole("button", {
-    name: "11",
+    name: "Feb 11, 2022",
   });
   userEvent.click(dayOfMonth);
 
   const okButton = screen.getByText(/ok/i);
   userEvent.click(okButton);
 
-  expect(fakeOnChange).toHaveBeenCalledTimes(1);
+  expect(fakeOnChange).toHaveBeenCalledTimes(2);
   const changedDate = new Date(fakeOnChange.mock.calls[0][0]);
 
   expect(changedDate.getDate()).toBe(11);
@@ -77,8 +77,8 @@ test("should not change if disabled", () => {
   userEvent.click(input);
 
   expect(
-    screen.queryByRole("button", {
-      name: "11",
+    screen.queryByRole("cell", {
+      name: "Feb 11, 2022",
     })
   ).not.toBeInTheDocument();
 });
