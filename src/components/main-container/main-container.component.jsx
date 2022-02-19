@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 10px black;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(255, 255, 255, 0.55);
 `;
 
 const MainContainer = ({ children }) => {
