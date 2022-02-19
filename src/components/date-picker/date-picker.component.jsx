@@ -30,7 +30,7 @@ const DatePickerComponent = ({
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <MobileDatePicker
-        label="Basic example"
+        label="Date"
         value={value}
         onChange={onChange}
         inputFormat="yyyy-MM-dd"
