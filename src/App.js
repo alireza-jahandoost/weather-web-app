@@ -1,11 +1,14 @@
 import BackgroundContainer from "./components/background-container/background-container.component";
 import MainContainer from "./components/main-container/main-container.component";
+import Weather from "./components/weather/weather.component";
 
 function App() {
   return (
     <div>
-      <BackgroundContainer></BackgroundContainer>
-      <MainContainer></MainContainer>
+      <BackgroundContainer />
+      <MainContainer>
+        <Weather />
+      </MainContainer>
     </div>
   );
 }
