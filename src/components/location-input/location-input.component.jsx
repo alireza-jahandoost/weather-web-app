@@ -9,14 +9,16 @@ const LocationInput = ({ errorMessage, onChange, value, disabled }) => {
     throw new Error("onChange property of LocationInput must be a function");
   }
   return (
-    <div>
+    <>
       <TextField
+        fullWidth={true}
         disabled={disabled}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        label="Location"
       />
       <ErrorContainer error={errorMessage} />
-    </div>
+    </>
   );
 };
 
