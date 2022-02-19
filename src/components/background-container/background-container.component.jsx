@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   -webkit-filter: blur(4px);
   height: 100vh;
   width: 100vw;
+  position: absolute;
 `;
 
 const BackgroundContainer = ({ children }) => {
