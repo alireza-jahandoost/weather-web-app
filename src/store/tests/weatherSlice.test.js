@@ -100,10 +100,10 @@ describe("check weather thunks", () => {
       );
 
       expect(mockedDispatch.mock.calls[2][0]["type"]).toBe(
-        updateDate({ day: 1, month: 1, year: 2022 }).type
+        updateDate({ day: 1, month: 0, year: 2022 }).type
       );
       expect(mockedDispatch.mock.calls[2][0]["payload"]).toEqual(
-        updateDate({ day: 1, month: 1, year: 2022 }).payload
+        updateDate({ day: 1, month: 0, year: 2022 }).payload
       );
 
       expect(mockedDispatch.mock.calls[3][0]["type"]).toBe(

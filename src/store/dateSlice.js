@@ -7,6 +7,9 @@ const initialState = {
   error: null,
 };
 
+// notice: the month in states must be between 0 - 11
+//         like Date object
+
 const dateSlice = createSlice({
   name: "date",
   initialState,

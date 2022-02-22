@@ -35,7 +35,7 @@ export const fetchWeather = createAsyncThunk(
     dispatch(
       updateDate({
         day: dateObject.getDate(),
-        month: dateObject.getMonth() + 1,
+        month: dateObject.getMonth(),
         year: dateObject.getFullYear(),
       })
     );
