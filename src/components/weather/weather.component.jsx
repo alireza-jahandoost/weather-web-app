@@ -49,10 +49,6 @@ const Weather = () => {
     [date, location]
   );
 
-  useEffect(() => {
-    dispatch(fetchWeather({ date, location }));
-  }, []);
-
   const handleDateChange = (newDate) => {
     setDate(formatDate(newDate));
   };

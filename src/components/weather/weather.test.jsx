@@ -1,16 +1,16 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { wrapIntoRedux } from "../../testing-utilities";
 import { Provider } from "react-redux";
+import userEvent from "@testing-library/user-event";
+import { format } from "date-fns";
+import { wrapIntoRedux, wait } from "../../testing-utilities";
 import Weather from "./weather.component";
 import * as weatherSlice from "../../store/weatherSlice";
 import weatherReducer from "../../store/weatherSlice";
 import { defaultLocation, defaultDate } from "./weather.component";
-import userEvent from "@testing-library/user-event";
-import { format } from "date-fns";
 import { formatDate } from "../../utilities";
 import { reducer } from "../../store";
 
-test("should dispatch the fetchWeather thunk when component renders", () => {
+test("should dispatch the fetchWeather thunk when component renders", async () => {
   const mockedFetchWeather = jest
     .spyOn(weatherSlice, "fetchWeather")
     .mockImplementation(() => {});
@@ -26,7 +26,7 @@ test("should dispatch the fetchWeather thunk when component renders", () => {
 
   render(wrappedComponent);
 
-  expect(mockedFetchWeather).toHaveBeenCalledTimes(1);
+  await waitFor(() => expect(mockedFetchWeather).toHaveBeenCalledTimes(1));
   expect(mockedDispatch).toHaveBeenCalledTimes(1);
   expect(mockedFetchWeather).toHaveBeenCalledWith({
     location: defaultLocation,
@@ -49,6 +49,7 @@ test("should dispatch the fetchWeather thunk when date changes", async () => {
     .mockImplementation(() => {});
 
   render(wrappedComponent);
+  await wait(500);
 
   const dateInput = screen.getByRole("textbox", { name: /choose date/i });
   userEvent.click(dateInput);
@@ -91,6 +92,7 @@ test("should dispatch the fetchWeather thunk when location changes", async () =>
     .mockImplementation(() => {});
 
   render(wrappedComponent);
+  await wait(500);
 
   const newLocation = "newLocation";
 
