@@ -2,10 +2,12 @@ import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import WeatherImage from "../weather-image/weather-image.component";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   locationSelector,
   stringedDateSelector,
   weatherDataSelector,
+  weatherStatusSelector,
 } from "../../store/selectors";
 
 const GridItem = ({ children, ...props }) => (
@@ -37,51 +39,84 @@ const SubTitleContainer = styled.p`
   color: #0000ff;
 `;
 
+const ProgressContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+`;
+
 const WeatherInfo = () => {
   const location = useSelector(locationSelector);
   const stringedDate = useSelector(stringedDateSelector);
   const weather = useSelector(weatherDataSelector);
+  const weatherStatus = useSelector(weatherStatusSelector);
 
-  return (
-    <div>
-      <Grid container>
-        <StyledGridItem xs={12} sm={8}>
-          <TitleContainer>{location}</TitleContainer>
-          <SubTitleContainer>Date: {stringedDate}</SubTitleContainer>
-          <TextContainer>Description: {weather.description}</TextContainer>
-          <TextContainer>Maximum temperature: {weather.tempmax}</TextContainer>
-          <TextContainer>Minimum temperature: {weather.tempmin}</TextContainer>
-          <TextContainer>pressure: {weather.pressure}</TextContainer>
-          <TextContainer>Wind Speed: {weather.windspeed}</TextContainer>
-        </StyledGridItem>
+  const Content = (() => {
+    switch (weatherStatus) {
+      case "fulfilled": {
+        return (
+          <div>
+            <Grid container>
+              <StyledGridItem xs={12} sm={8}>
+                <TitleContainer>{location}</TitleContainer>
+                <SubTitleContainer>Date: {stringedDate}</SubTitleContainer>
+                <TextContainer>
+                  Description: {weather.description}
+                </TextContainer>
+                <TextContainer>
+                  Maximum temperature: {weather.tempmax}
+                </TextContainer>
+                <TextContainer>
+                  Minimum temperature: {weather.tempmin}
+                </TextContainer>
+                <TextContainer>pressure: {weather.pressure}</TextContainer>
+                <TextContainer>Wind Speed: {weather.windspeed}</TextContainer>
+              </StyledGridItem>
 
-        <StyledGridItem xs={12} sm={4}>
-          <WeatherImage />
-        </StyledGridItem>
-      </Grid>
+              <StyledGridItem xs={12} sm={4}>
+                <WeatherImage />
+              </StyledGridItem>
+            </Grid>
 
-      <Grid container>
-        <StyledGridItem xs={6} sm={4}>
-          <CentralContainer>
-            <p>Humidity</p>
-            <p>{weather.humidity}</p>
-          </CentralContainer>
-        </StyledGridItem>
-        <StyledGridItem xs={6} sm={4}>
-          <CentralContainer>
-            <p>Feels Like</p>
-            <p>{weather.feelslike}</p>
-          </CentralContainer>
-        </StyledGridItem>
-        <StyledGridItem xs={6} sm={4}>
-          <CentralContainer>
-            <p>Temperature</p>
-            <p>{weather.temp}</p>
-          </CentralContainer>
-        </StyledGridItem>
-      </Grid>
-    </div>
-  );
+            <Grid container>
+              <StyledGridItem xs={6} sm={4}>
+                <CentralContainer>
+                  <p>Humidity</p>
+                  <p>{weather.humidity}</p>
+                </CentralContainer>
+              </StyledGridItem>
+              <StyledGridItem xs={6} sm={4}>
+                <CentralContainer>
+                  <p>Feels Like</p>
+                  <p>{weather.feelslike}</p>
+                </CentralContainer>
+              </StyledGridItem>
+              <StyledGridItem xs={6} sm={4}>
+                <CentralContainer>
+                  <p>Temperature</p>
+                  <p>{weather.temp}</p>
+                </CentralContainer>
+              </StyledGridItem>
+            </Grid>
+          </div>
+        );
+      }
+      case "rejected":
+        return null;
+      case "pending": {
+        return (
+          <ProgressContainer>
+            <CircularProgress />
+          </ProgressContainer>
+        );
+      }
+      default:
+        return null;
+    }
+  })();
+
+  return Content;
 };
 
 export default WeatherInfo;

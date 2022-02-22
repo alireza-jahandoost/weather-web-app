@@ -19,6 +19,8 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const GridItem = ({ children, ...props }) => (
