@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { useDispatch } from "react-redux";
-import { wrapIntoRedux } from ".";
+import { wrapIntoRedux, wait } from ".";
 
 const testReducer = (state = {}, action) => {
   return state;
@@ -72,5 +72,34 @@ describe("test wrapIntoRedux", () => {
 
     expect(returnedValue).toHaveProperty("store");
     expect(returnedValue).toHaveProperty("wrappedComponent");
+  });
+});
+
+describe("test wait", () => {
+  describe("should wait for specific time", () => {
+    test("when delay is 500", async () => {
+      const first = window.performance.now();
+      const delay = 500;
+      await wait(delay);
+      const second = window.performance.now();
+      expect(second - first).toBeGreaterThan(delay - 50);
+      expect(second - first).toBeLessThan(delay + 50);
+    });
+    test("when delay is 1000", async () => {
+      const first = window.performance.now();
+      const delay = 1000;
+      await wait(delay);
+      const second = window.performance.now();
+      expect(second - first).toBeGreaterThan(delay - 50);
+      expect(second - first).toBeLessThan(delay + 50);
+    });
+    test("when delay is 1500", async () => {
+      const first = window.performance.now();
+      const delay = 1500;
+      await wait(delay);
+      const second = window.performance.now();
+      expect(second - first).toBeGreaterThan(delay - 50);
+      expect(second - first).toBeLessThan(delay + 50);
+    });
   });
 });
