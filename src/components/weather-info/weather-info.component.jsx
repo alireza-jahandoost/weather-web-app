@@ -16,13 +16,26 @@ const GridItem = ({ children, ...props }) => (
 
 const CentralContainer = styled.div`
   text-align: center;
+  color: #050a30;
+  background-color: rgba(0, 0, 255, 0.55);
+  margin: 1rem;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
 `;
 
 const StyledGridItem = styled(GridItem)``;
 
-const TextContainer = styled.p``;
-const TitleContainer = styled.h1``;
-const SubTitleContainer = styled.p``;
+const TextContainer = styled.p`
+  color: #000c66;
+`;
+const TitleContainer = styled.h1`
+  color: #000c66;
+`;
+//color: #050a30;
+
+const SubTitleContainer = styled.p`
+  color: #0000ff;
+`;
 
 const WeatherInfo = () => {
   const location = useSelector(locationSelector);
