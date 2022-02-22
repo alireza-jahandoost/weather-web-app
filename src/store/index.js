@@ -3,12 +3,14 @@ import dateReducer from "./dateSlice";
 import locationReducer from "./locationSlice";
 import weatherReducer from "./weatherSlice";
 
+export const reducer = {
+  date: dateReducer,
+  weather: weatherReducer,
+  location: locationReducer,
+};
+
 const store = configureStore({
-  reducer: {
-    date: dateReducer,
-    weather: weatherReducer,
-    location: locationReducer,
-  },
+  reducer,
 });
 
 export default store;

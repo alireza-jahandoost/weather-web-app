@@ -8,6 +8,7 @@ import { defaultLocation, defaultDate } from "./weather.component";
 import userEvent from "@testing-library/user-event";
 import { format } from "date-fns";
 import { formatDate } from "../../utilities";
+import { reducer } from "../../store";
 
 test("should dispatch the fetchWeather thunk when component renders", () => {
   const mockedFetchWeather = jest
@@ -16,7 +17,7 @@ test("should dispatch the fetchWeather thunk when component renders", () => {
 
   const { wrappedComponent, store } = wrapIntoRedux({
     component: <Weather />,
-    reducers: { weather: weatherReducer },
+    reducers: reducer,
   });
 
   const mockedDispatch = jest
@@ -40,7 +41,7 @@ test("should dispatch the fetchWeather thunk when date changes", async () => {
 
   const { wrappedComponent, store } = wrapIntoRedux({
     component: <Weather />,
-    reducers: { weather: weatherReducer },
+    reducers: reducer,
   });
 
   const mockedDispatch = jest
@@ -82,7 +83,7 @@ test("should dispatch the fetchWeather thunk when location changes", async () =>
 
   const { wrappedComponent, store } = wrapIntoRedux({
     component: <Weather />,
-    reducers: { weather: weatherReducer },
+    reducers: reducer,
   });
 
   const mockedDispatch = jest
