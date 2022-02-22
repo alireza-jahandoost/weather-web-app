@@ -62,7 +62,7 @@ test("dateSelector should return an object with day, month and year", () => {
 
 test("stringedDateSelector should return a string in format yyyy-mm-dd", () => {
   expect(stringedDateSelector(state)).toBe(
-    formatDate(new Date(state.date.year, state.date.month - 1, state.date.day))
+    formatDate(new Date(state.date.year, state.date.month, state.date.day))
   );
 });
 

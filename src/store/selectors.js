@@ -24,7 +24,7 @@ export const dateSelector = createSelector(
 );
 export const stringedDateSelector = createSelector(
   dateObjectSelector,
-  ({ day, month, year }) => formatDate(new Date(year, month - 1, day))
+  ({ day, month, year }) => formatDate(new Date(year, month, day))
 );
 export const dateErrorSelector = createSelector(
   dateObjectSelector,
