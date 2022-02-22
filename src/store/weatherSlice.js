@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { weatherUrl } from "../api/urlCreator";
 import { KEY } from "../api/key.js";
+import { updateDate } from "./dateSlice";
+import { updateLocation } from "./locationSlice";
+import { parse } from "date-fns";
 
 export const keys = [
   "description",
@@ -16,10 +19,26 @@ export const keys = [
 
 export const fetchWeather = createAsyncThunk(
   "weather/fetchWeather",
-  async ({ location, date }) => {
+  async ({ location, date }, { dispatch }) => {
     const response = await fetch(weatherUrl({ location, date, key: KEY }));
 
     const data = await response.json();
+    dispatch(
+      updateLocation({
+        location: data.address,
+        latitude: data.latitude,
+        longitude: data.longitude,
+      })
+    );
+    const stringedDate = data.days[0].datetime;
+    const dateObject = parse(stringedDate, "yyyy-MM-dd", new Date());
+    dispatch(
+      updateDate({
+        day: dateObject.getDate(),
+        month: dateObject.getMonth() + 1,
+        year: dateObject.getFullYear(),
+      })
+    );
     return data;
   }
 );

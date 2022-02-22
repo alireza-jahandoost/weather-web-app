@@ -8,6 +8,8 @@ import weatherReducer, {
 import { weatherUrl } from "../../api/urlCreator";
 import { KEY } from "../../api/key.js";
 import { fakeWeatherResponse } from "../../mocks/fakeResponse";
+import { updateLocation } from "../locationSlice";
+import { updateDate } from "../dateSlice";
 
 const actionsName = { updateWeather: "weather/updateWeather" };
 
@@ -66,6 +68,56 @@ describe("check weather reducer", () => {
 
 describe("check weather thunks", () => {
   describe("check fetchWeather thunk", () => {
+    test("should dispatch updateLocation and updateDate actions with correct data", async () => {
+      const mockedDispatch = jest.fn();
+      const date = "2022-01-01";
+      const location = "mashhad";
+
+      const func = fetchWeather({ date, location });
+      func(mockedDispatch);
+
+      await waitFor(() => expect(mockedDispatch).toHaveBeenCalledTimes(4));
+      expect(mockedDispatch.mock.calls[0][0]["type"]).toBe(
+        fetchWeather.pending().type
+      );
+      expect(mockedDispatch.mock.calls[0][0]["payload"]).toBe(
+        fetchWeather.pending().payload
+      );
+
+      expect(mockedDispatch.mock.calls[1][0]["type"]).toBe(
+        updateLocation({
+          location: "mashhad",
+          latitude: "2022-01-01",
+          longitude: "2022-01-01",
+        }).type
+      );
+      expect(mockedDispatch.mock.calls[1][0]["payload"]).toEqual(
+        updateLocation({
+          location: "mashhad",
+          latitude: 32.7409,
+          longitude: 35.3223,
+        }).payload
+      );
+
+      expect(mockedDispatch.mock.calls[2][0]["type"]).toBe(
+        updateDate({ day: 1, month: 1, year: 2022 }).type
+      );
+      expect(mockedDispatch.mock.calls[2][0]["payload"]).toEqual(
+        updateDate({ day: 1, month: 1, year: 2022 }).payload
+      );
+
+      expect(mockedDispatch.mock.calls[3][0]["type"]).toBe(
+        fetchWeather.fulfilled(
+          fakeWeatherResponse({ address: "mashhad", datetime: "2022-01-01" })
+        ).type
+      );
+      expect(mockedDispatch.mock.calls[3][0]["payload"]).toEqual(
+        fetchWeather.fulfilled(
+          fakeWeatherResponse({ address: "mashhad", datetime: "2022-01-01" })
+        ).payload
+      );
+    });
+
     test("when fetchWeather called, the fetch function must be called with correct url", async () => {
       const mockedDispatch = jest.fn();
       const mockedFetch = jest
@@ -91,7 +143,7 @@ describe("check weather thunks", () => {
       const func = fetchWeather({ date, location });
       func(mockedDispatch);
 
-      await waitFor(() => expect(mockedDispatch).toHaveBeenCalledTimes(2));
+      await waitFor(() => expect(mockedDispatch).toHaveBeenCalledTimes(4));
       expect(mockedDispatch.mock.calls[0][0]["type"]).toBe(
         fetchWeather.pending().type
       );
@@ -99,12 +151,12 @@ describe("check weather thunks", () => {
         fetchWeather.pending().payload
       );
 
-      expect(mockedDispatch.mock.calls[1][0]["type"]).toBe(
+      expect(mockedDispatch.mock.calls[3][0]["type"]).toBe(
         fetchWeather.fulfilled(
           fakeWeatherResponse({ address: "mashhad", datetime: "2022-01-01" })
         ).type
       );
-      expect(mockedDispatch.mock.calls[1][0]["payload"]).toEqual(
+      expect(mockedDispatch.mock.calls[3][0]["payload"]).toEqual(
         fetchWeather.fulfilled(
           fakeWeatherResponse({ address: "mashhad", datetime: "2022-01-01" })
         ).payload
