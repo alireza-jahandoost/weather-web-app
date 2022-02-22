@@ -30,13 +30,19 @@ const StyledGridItem = styled(GridItem)``;
 const TextContainer = styled.p`
   color: #000c66;
 `;
+const BoldTextContainer = styled.p`
+  color: #000c66;
+  font-weight: bold;
+`;
 const TitleContainer = styled.h1`
   color: #000c66;
+  margin-bottom: 0;
 `;
 //color: #050a30;
 
 const SubTitleContainer = styled.p`
   color: #0000ff;
+  margin-top: 0;
 `;
 
 const ProgressContainer = styled.div`
@@ -60,10 +66,8 @@ const WeatherInfo = () => {
             <Grid container>
               <StyledGridItem xs={12} sm={8}>
                 <TitleContainer>{location}</TitleContainer>
-                <SubTitleContainer>Date: {stringedDate}</SubTitleContainer>
-                <TextContainer>
-                  Description: {weather.description}
-                </TextContainer>
+                <SubTitleContainer>{stringedDate}</SubTitleContainer>
+                <BoldTextContainer>{weather.description}</BoldTextContainer>
                 <TextContainer>
                   Maximum temperature: {weather.tempmax}
                 </TextContainer>
