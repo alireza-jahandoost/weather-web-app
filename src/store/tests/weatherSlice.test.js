@@ -4,6 +4,7 @@ import weatherReducer, {
   keys,
   initialState,
   fetchWeather,
+  errorMessage,
 } from "../weatherSlice";
 import { weatherUrl } from "../../api/urlCreator";
 import { KEY } from "../../api/key.js";
@@ -17,10 +18,16 @@ describe("check weather actions", () => {});
 
 describe("check weather reducer", () => {
   describe("check fetchWeather thunk's actions", () => {
-    test("when fetchWeather.pending is dispatched, the status must be changed to pending", () => {
+    test("when fetchWeather.pending is dispatched, the status must be changed to pending and error must be gone", () => {
       expect(weatherReducer(initialState, fetchWeather.pending()).status).toBe(
         "pending"
       );
+      expect(
+        weatherReducer(
+          { ...initialState, error: errorMessage },
+          fetchWeather.pending()
+        ).error
+      ).toBe(null);
     });
 
     test("when fetchWeather.fulfilled is dispatched, the status must be changed to fulfilled and weather must be set", () => {
@@ -60,7 +67,7 @@ describe("check weather reducer", () => {
       ).toEqual({
         ...initialState,
         status: "rejected",
-        error: message,
+        error: errorMessage,
       });
     });
   });

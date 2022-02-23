@@ -17,6 +17,8 @@ export const keys = [
   "pressure",
 ];
 
+export const errorMessage = "the location is not found";
+
 export const fetchWeather = createAsyncThunk(
   "weather/fetchWeather",
   async ({ location, date }, { dispatch }) => {
@@ -67,6 +69,7 @@ const weatherSlice = createSlice({
     builder
       .addCase(fetchWeather.pending, (state) => {
         state.status = "pending";
+        state.error = null;
       })
       .addCase(fetchWeather.fulfilled, (state, action) => {
         state.status = "fulfilled";
@@ -79,7 +82,7 @@ const weatherSlice = createSlice({
       })
       .addCase(fetchWeather.rejected, (state, action) => {
         state.status = "rejected";
-        state.error = action.error.message;
+        state.error = errorMessage;
       });
   },
 });
