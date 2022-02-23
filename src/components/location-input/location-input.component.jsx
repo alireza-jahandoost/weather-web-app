@@ -1,5 +1,4 @@
 import TextField from "@mui/material/TextField";
-import ErrorContainer from "../error-container/error-container.component";
 
 const LocationInput = ({ errorMessage, onChange, value, disabled }) => {
   if (typeof value !== "string") {
