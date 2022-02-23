@@ -69,17 +69,19 @@ const WeatherInfo = () => {
                 <SubTitleContainer>{stringedDate}</SubTitleContainer>
                 <BoldTextContainer>{weather.description}</BoldTextContainer>
                 <TextContainer>
-                  Maximum temperature: {weather.tempmax}
+                  Maximum temperature: {weather.tempmax} °C
                 </TextContainer>
                 <TextContainer>
-                  Minimum temperature: {weather.tempmin}
+                  Minimum temperature: {weather.tempmin} °C
                 </TextContainer>
-                <TextContainer>pressure: {weather.pressure}</TextContainer>
-                <TextContainer>Wind Speed: {weather.windspeed}</TextContainer>
+                <TextContainer>pressure: {weather.pressure} mb</TextContainer>
+                <TextContainer>
+                  Wind Speed: {weather.windspeed} Km/h
+                </TextContainer>
               </StyledGridItem>
 
               <StyledGridItem xs={12} sm={4}>
-                <WeatherImage />
+                <WeatherImage iconType={weather.icon} />
               </StyledGridItem>
             </Grid>
 
@@ -87,19 +89,19 @@ const WeatherInfo = () => {
               <StyledGridItem xs={6} sm={4}>
                 <CentralContainer>
                   <p>Humidity</p>
-                  <p>{weather.humidity}</p>
+                  <p>{weather.humidity} %</p>
                 </CentralContainer>
               </StyledGridItem>
               <StyledGridItem xs={6} sm={4}>
                 <CentralContainer>
                   <p>Feels Like</p>
-                  <p>{weather.feelslike}</p>
+                  <p>{weather.feelslike} °C</p>
                 </CentralContainer>
               </StyledGridItem>
               <StyledGridItem xs={6} sm={4}>
                 <CentralContainer>
                   <p>Temperature</p>
-                  <p>{weather.temp}</p>
+                  <p>{weather.temp} °C</p>
                 </CentralContainer>
               </StyledGridItem>
             </Grid>
