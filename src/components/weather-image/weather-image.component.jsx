@@ -8,7 +8,10 @@ const ImageContainer = styled.div`
 `;
 
 const Image = styled.img`
-  width: 50%;
+  width: 60%;
+  @media (max-width: 600px) {
+    width: 35%;
+  }
 `;
 
 export const availableIcons = [
