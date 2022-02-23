@@ -99,7 +99,7 @@ const WeatherInfo = () => {
                   <p>{weather.feelslike} °C</p>
                 </CentralContainer>
               </StyledGridItem>
-              <StyledGridItem xs={6} sm={4}>
+              <StyledGridItem xs={12} sm={4}>
                 <CentralContainer>
                   <p>Temperature</p>
                   <p>{weather.temp} °C</p>
