@@ -11,10 +11,39 @@ const Image = styled.img`
   width: 50%;
 `;
 
-const WeatherImage = () => {
+export const availableIcons = [
+  "clear-day",
+  "partly-cloudy-day",
+  "showers-night",
+  "partly-cloudy-night",
+  "wind",
+  "thunder-showers-night",
+  "thunder-rain",
+  "rain-snow",
+  "snow-showers-day",
+  "snow-showers-night",
+  "hail",
+  "rain",
+  "sleet",
+  "showers-day",
+  "cloudy",
+  "thunder",
+  "rain-snow-showers-day",
+  "fog",
+  "clear-night",
+  "snow",
+  "rain-snow-showers-night",
+  "thunder-showers-day",
+];
+
+const WeatherImage = ({ iconType }) => {
+  const iconName = availableIcons.some((icon) => icon === iconType)
+    ? iconType
+    : "clear-day";
+
   return (
     <ImageContainer>
-      <Image src="./icons/clear-day.png" />
+      <Image src={`./icons/${iconName}.png`} alt={iconName} />
     </ImageContainer>
   );
 };
