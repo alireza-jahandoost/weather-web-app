@@ -17,7 +17,7 @@ export const keys = [
   "pressure",
 ];
 
-export const errorMessage = "the location is not found";
+export const errorMessage = "location not found";
 
 export const fetchWeather = createAsyncThunk(
   "weather/fetchWeather",

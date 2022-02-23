@@ -109,3 +109,26 @@ test("should dispatch the fetchWeather thunk when location changes", async () =>
     })
   );
 });
+
+test("should show the error if weather has error", async () => {
+  const { wrappedComponent, store } = wrapIntoRedux({
+    component: <Weather />,
+    reducers: reducer,
+  });
+
+  store.dispatch(weatherSlice.fetchWeather.rejected());
+
+  const mockedFetchWeather = jest
+    .spyOn(weatherSlice, "fetchWeather")
+    .mockImplementation(() => {});
+
+  const mockedDispatch = jest
+    .spyOn(store, "dispatch")
+    .mockImplementation(() => {});
+
+  render(wrappedComponent);
+
+  await waitFor(() =>
+    expect(screen.getByText(weatherSlice.errorMessage)).toBeInTheDocument()
+  );
+});

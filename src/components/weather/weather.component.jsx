@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatDate } from "../../utilities";
 import DatePicker from "../date-picker/date-picker.component";
 import LocationInput from "../location-input/location-input.component";
@@ -8,6 +8,7 @@ import { Grid } from "@mui/material";
 import WeatherInfo from "../weather-info/weather-info.component";
 import { fetchWeather } from "../../store/weatherSlice";
 import { useDebounce } from "react-use";
+import { weatherErrorSelector } from "../../store/selectors";
 
 const Wrapper = styled.div`
   width: 600px;
@@ -40,6 +41,7 @@ const Weather = () => {
   const [date, setDate] = useState(defaultDate);
   const [location, setLocation] = useState(defaultLocation);
   const dispatch = useDispatch();
+  const weatherErrorMessage = useSelector(weatherErrorSelector);
 
   useDebounce(
     () => {
@@ -66,7 +68,11 @@ const Weather = () => {
           </StyledGridItem>
 
           <StyledGridItem xs={12} sm={6}>
-            <LocationInput value={location} onChange={handleLocationChange} />
+            <LocationInput
+              value={location}
+              onChange={handleLocationChange}
+              errorMessage={weatherErrorMessage}
+            />
           </StyledGridItem>
         </Grid>
 

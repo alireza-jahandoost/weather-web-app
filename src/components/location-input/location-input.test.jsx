@@ -73,4 +73,18 @@ test("should show the error if it exists", () => {
   );
 
   expect(screen.getByText(errorMessage)).toBeInTheDocument();
+  expect(screen.getByRole("textbox", { name: /location/i })).toHaveAttribute(
+    "aria-invalid",
+    "true"
+  );
+});
+
+test("should not have aria-invalid if error does not exist", () => {
+  const mockedOnChange = jest.fn();
+
+  render(<LocationInput value={""} onChange={mockedOnChange} />);
+
+  expect(
+    screen.getByRole("textbox", { name: /location/i })
+  ).not.toHaveAttribute("aria-invalid", "true");
 });
