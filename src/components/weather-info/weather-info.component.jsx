@@ -23,6 +23,7 @@ const CentralContainer = styled.div`
   margin: 1rem;
   padding: 0.3rem;
   border-radius: 0.5rem;
+  font-weight: bold;
 `;
 
 const StyledGridItem = styled(GridItem)``;
