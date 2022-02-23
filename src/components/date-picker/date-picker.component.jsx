@@ -1,10 +1,7 @@
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
-import styled from "styled-components";
 import { MobileDatePicker } from "@mui/lab";
-import { formatDate } from "../../utilities";
 import ErrorContainer from "../error-container/error-container.component";
 
 const DatePickerComponent = ({
@@ -13,7 +10,7 @@ const DatePickerComponent = ({
   onChange,
   disabled = false,
 }) => {
-  if (!/\d{4}\-\d{2}\-\d{2}/.test(value)) {
+  if (!/\d{4}-\d{2}-\d{2}/.test(value)) {
     throw new Error(
       "the value of DatePickerComponent must be in format yyyy-MM-dd"
     );
