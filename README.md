@@ -27,7 +27,7 @@
   <h3 align="center">Weather Web App</h3>
 
   <p align="center">
-      A weather web app connected to [Visual Crossing](https://www.visualcrossing.com/) API
+      A weather web app connected to <a href="https://www.visualcrossing.com/">Visual Crossing</a> API
     <br />
     <a href="https://github.com/alireza-jahandoost/weather-web-app"><strong>Explore the docs »</strong></a>
     <br />
@@ -91,7 +91,6 @@ The features that are currently supported:
 ### Built With
 
 * [React.js](https://reactjs.org/)
-* [Laravel](https://laravel.com)
 * [MUI](https://mui.com)
 * [Redux](https://redux.js.org/)
 * [Styled Components](https://styled-components.com/)
